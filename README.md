@@ -1,5 +1,4 @@
 # Number-Guessing-Game
-Number Guessing Game
 
 The project is a simple Number Guessing Game implemented using Java Swing for the graphical user interface (GUI) where the user tries to guess a randomly generated number within a specified range. Here are the key features of the game:
 
