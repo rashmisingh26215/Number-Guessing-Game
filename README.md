@@ -14,3 +14,10 @@ Visual Feedback: The game provides visual feedback to the user using text labels
 
 Overall, the Number Guessing Game offers an interactive and enjoyable experience for users to test their guessing skills and try to achieve a high score within the given number of attempts.
 
+
+#output
+![Screenshot (310)](https://github.com/rashmisingh26215/Number-Guessing-Game/assets/98443064/887e1934-e12b-44d4-b4e8-118c3cffaff5)
+
+![Screenshot (311)](https://github.com/rashmisingh26215/Number-Guessing-Game/assets/98443064/3b1baef2-1c08-4f1c-997c-396f13e0d40a)
+
+![Screenshot (312)](https://github.com/rashmisingh26215/Number-Guessing-Game/assets/98443064/c2ce24c0-88a3-42cb-9667-5ddc52836716)
