@@ -1,0 +1,118 @@
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+
+public class NumberGuessingGameGUI {
+    private static int minRange = 1;
+    private static int maxRange = 100;
+    private static int attempts = 0;
+    private static int score = 0;
+    private static int targetNumber;
+    private static JFrame frame;
+    private static JLabel rangeLabel;
+    private static JLabel attemptsLabel;
+    private static JLabel resultLabel;
+    private static JTextField guessField;
+    private static JButton submitButton;
+    private static JLabel scoreLabel; // New JLabel for displaying the score
+
+    public static void main(String[] args) {
+        frame = new JFrame("Guess the Number");
+        frame.getContentPane().setBackground(Color.lightGray);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1650, 1080);
+        frame.setLayout(null); // Set layout manager to null for custom positioning
+
+        rangeLabel = new JLabel("A random number between " + minRange + " and " + maxRange + " has been generated.");
+        rangeLabel.setBounds(550, 140, 560, 30);
+        rangeLabel.setFont(rangeLabel.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(rangeLabel);
+
+        JLabel guessLabel = new JLabel("Enter your guess:");
+        guessLabel.setBounds(550, 190, 180, 30);
+        guessLabel.setFont(guessLabel.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(guessLabel);
+
+        guessField = new JTextField(10);
+        guessField.setBounds(730, 190, 120, 30);
+        guessField.setFont(guessField.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(guessField);
+
+        submitButton = new JButton("Submit");
+        submitButton.setBounds(860, 190, 120, 30);
+        submitButton.setFont(submitButton.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(submitButton);
+
+        attemptsLabel = new JLabel("Attempts: " + attempts);
+        attemptsLabel.setBounds(550, 240, 120, 30);
+        attemptsLabel.setFont(attemptsLabel.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(attemptsLabel);
+
+        resultLabel = new JLabel();
+        resultLabel.setBounds(550, 290, 500, 30);
+        resultLabel.setFont(resultLabel.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(resultLabel);
+
+        scoreLabel = new JLabel("You scored " + score + " Points"); // Create score label and set initial score
+        scoreLabel.setBounds(550, 340, 200, 30);
+        scoreLabel.setFont(scoreLabel.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(scoreLabel);
+
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int guess = Integer.parseInt(guessField.getText());
+                attempts++;
+
+                if (guess == targetNumber) {
+                    String message = "<html><font color='green'>Congratulations! You guessed the correct number.</font></html>";
+                    resultLabel.setText(message);
+                    score = 10 - attempts;
+                    submitButton.setEnabled(false);
+                } else if (guess < targetNumber) {
+                    resultLabel.setText("Too low! Try guessing a higher number.");
+                } else {
+                    resultLabel.setText("Too high! Try guessing a lower number.");
+                }
+
+                attemptsLabel.setText("Attempts: " + attempts);
+                scoreLabel.setText("You scored " + score + " Points"); // Update the score label
+
+                if (attempts == 10) {
+                    JOptionPane.showMessageDialog(frame, "Maximum attempts reached. Play Again!");
+                    resetGame();
+                }
+            }
+        });
+
+        JButton playAgainButton = new JButton("Play Again");
+        playAgainButton.setBounds(760, 390, 160, 30);
+        playAgainButton.setFont(playAgainButton.getFont().deriveFont(20f)); // Set font size to 20
+        frame.add(playAgainButton);
+
+        playAgainButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                resetGame();
+            }
+        });
+
+        frame.setVisible(true);
+        resetGame();
+    }
+
+    private static void resetGame() {
+        targetNumber = generateRandomNumber();
+        attempts = 0;
+        score = 0;
+        resultLabel.setText("");
+        attemptsLabel.setText("Attempts: " + attempts);
+        guessField.setText("");
+        submitButton.setEnabled(true);
+        scoreLabel.setText("You scored " + score + " Points"); // Reset the score label
+    }
+
+    private static int generateRandomNumber() {
+        return (int) (Math.random() * (maxRange - minRange + 1)) + minRange;
+    }
+}
